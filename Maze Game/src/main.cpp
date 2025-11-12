@@ -121,9 +121,9 @@ void loop()
 
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print("Time's Up!");
+      lcd.print("Game Over!");
       lcd.setCursor(0, 1);
-      lcd.print("Total: ");
+      lcd.print("Time: ");
       lcd.print(gameDuration);
       lcd.print("s   ");
     }
