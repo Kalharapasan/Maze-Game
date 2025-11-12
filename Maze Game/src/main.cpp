@@ -28,6 +28,10 @@ const int centerMax = 540;
 
 bool prevJoystickMoved = false;
 
+const unsigned long centerHoldTime = 300;
+
+unsigned long joystickCenterStart = 0;
+
 void setup() 
 {
   lcd.init();        
@@ -127,20 +131,31 @@ void loop()
     
     if (!joystickMoved && elapsedTime < gameDuration)
     {
+      if (joystickCenterStart == 0) {
+        
+        joystickCenterStart = millis();
+      } else if (millis() - joystickCenterStart >= centerHoldTime) {
+       
+        gameRunning = false;
+        digitalWrite(greenLed, LOW);
+        digitalWrite(redLED, HIGH);
+
+        unsigned long finalTime = (millis() - startTime) / 1000;
+
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Game Over!");
+        lcd.setCursor(0, 1);
+        lcd.print("Time: ");
+        lcd.print(finalTime);
+        lcd.print("s   ");
+        joystickCenterStart = 0;
+      }
+    }
+    else
+    {
       
-      gameRunning = false;
-      digitalWrite(greenLed, LOW);
-      digitalWrite(redLED, HIGH);
-
-      unsigned long finalTime = (millis() - startTime) / 1000;
-
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Game Over!");
-      lcd.setCursor(0, 1);
-      lcd.print("Time: ");
-      lcd.print(finalTime);
-      lcd.print("s   ");
+      joystickCenterStart = 0;
     }
   }
   prevJoystickMoved = joystickMoved;
