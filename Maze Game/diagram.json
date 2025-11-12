@@ -54,12 +54,12 @@
     [ "lcd1:GND", "uno:GND.3", "black", [ "h0" ] ],
     [ "joystick1:VERT", "uno:A0", "green", [ "v48", "h172.8" ] ],
     [ "joystick1:HORZ", "uno:A1", "green", [ "v57.6", "h134.4" ] ],
-    [ "led2:C", "uno:13", "green", [ "v38.4", "h144.4" ] ],
-    [ "uno:12", "led1:C", "green", [ "v-57.6", "h-37.9" ] ],
-    [ "led2:A", "led1:A", "green", [ "v0", "h19.2", "v-57.6", "h57.6", "v48" ] ],
-    [ "led1:A", "bb2:4t.c", "green", [ "v38.4", "h364.8" ] ],
     [ "servo1:PWM", "uno:6", "green", [ "h0" ] ],
-    [ "uno:5", "servo2:PWM", "green", [ "v-86.4", "h147.8", "v-57.6" ] ]
+    [ "uno:5", "servo2:PWM", "green", [ "v-86.4", "h147.8", "v-57.6" ] ],
+    [ "led1:A", "uno:12", "green", [ "v9.6", "h76.8" ] ],
+    [ "uno:13", "led2:A", "green", [ "v-28.8", "h-95.6" ] ],
+    [ "led2:C", "led1:C", "green", [ "v0", "h-18.8", "v-38.4", "h48", "v38.4" ] ],
+    [ "led1:C", "bb2:3t.b", "green", [ "v28.8", "h0.4" ] ]
   ],
   "dependencies": {}
 }

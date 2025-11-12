@@ -26,13 +26,15 @@ const unsigned long gameDuration = 30;
 const int centerMin = 480;
 const int centerMax = 540;
 
+bool prevJoystickMoved = false;
+
 void setup() 
 {
   lcd.init();        
   lcd.backlight();   
   lcd.clear();
   Serial.begin(9600);
-  
+
   servo1.attach(5);   
   servo2.attach(6);
 
@@ -54,7 +56,8 @@ void loop()
 
   bool joystickMoved = (xVal < centerMin || xVal > centerMax || yVal < centerMin || yVal > centerMax);
 
-  if (joystickMoved && !gameRunning)
+
+  if (joystickMoved && !prevJoystickMoved && !gameRunning)
   {
 
     gameRunning = true;
@@ -140,6 +143,7 @@ void loop()
       lcd.print("s   ");
     }
   }
+  prevJoystickMoved = joystickMoved;
 
   delay(50); 
 }
