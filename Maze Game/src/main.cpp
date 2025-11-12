@@ -32,6 +32,8 @@ const unsigned long centerHoldTime = 300;
 
 unsigned long joystickCenterStart = 0;
 
+unsigned long gameEndTime = 0;
+
 void setup() 
 {
   lcd.init();        
@@ -61,7 +63,7 @@ void loop()
   bool joystickMoved = (xVal < centerMin || xVal > centerMax || yVal < centerMin || yVal > centerMax);
 
 
-  if (joystickMoved && !prevJoystickMoved && !gameRunning)
+  if (joystickMoved && !prevJoystickMoved && !gameRunning && (millis() - gameEndTime > 2000))
   {
 
     gameRunning = true;
@@ -119,6 +121,8 @@ void loop()
       digitalWrite(greenLed, LOW);
       digitalWrite(redLED, HIGH);
 
+      gameEndTime = millis();
+
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Game Over!");
@@ -139,6 +143,8 @@ void loop()
         gameRunning = false;
         digitalWrite(greenLed, LOW);
         digitalWrite(redLED, HIGH);
+
+        gameEndTime = millis();
 
         unsigned long finalTime = (millis() - startTime) / 1000;
 
